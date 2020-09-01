@@ -66,6 +66,12 @@
     },
     "debugger-ui": {
       "tags": []
+    },
+    "remix-ui-tree-view": {
+      "tags": []
+    },
+    "remix-ui-debugger-ui": {
+      "tags": []
     }
   }
 }
