@@ -64,9 +64,6 @@
       "tags": [],
       "implicitDependencies": ["remix-ide"]
     },
-    "debugger-ui": {
-      "tags": []
-    },
     "remix-ui-tree-view": {
       "tags": []
     },

@@ -464,33 +464,6 @@
         }
       }
     },
-    "debugger-ui": {
-      "root": "libs/debugger-ui",
-      "sourceRoot": "libs/debugger-ui/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": [
-              "libs/debugger-ui/tsconfig.lib.json",
-              "libs/debugger-ui/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/debugger-ui/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/debugger-ui/jest.config.js",
-            "tsConfig": "libs/debugger-ui/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "remix-ui-tree-view": {
       "root": "libs/remix-ui/tree-view",
       "sourceRoot": "libs/remix-ui/tree-view/src",
