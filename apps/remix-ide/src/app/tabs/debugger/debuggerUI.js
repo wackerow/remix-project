@@ -1,7 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { TreeView, TreeViewItem } from '@remix-ui/tree-view'
-
 var TxBrowser = require('./debuggerUI/TxBrowser')
 var StepManagerUI = require('./debuggerUI/StepManager')
 var VmDebugger = require('./debuggerUI/VmDebugger')
@@ -198,7 +194,6 @@ class DebuggerUI {
         </div>
         <div class="${css.statusMessage}">${this.statusMessage}</div>
         ${this.debuggerPanelsView}
-        <div id="treeViewReact"></div>
       </div>
     `
     if (!this.view) {
@@ -228,26 +223,6 @@ class DebuggerUI {
     yo.update(this.debuggerHeadPanelsView, this.vmDebugger.renderHead())
     yo.update(this.debuggerPanelsView, this.vmDebugger.render())
     yo.update(this.stepManagerView, this.stepManager.render())
-    ReactDOM.render(
-      <TreeView>
-        <TreeViewItem label="Item 1" />
-        <TreeViewItem label={<strong style={{ color: 'blue' }}>Item 2</strong>} />
-        <TreeViewItem label="Item 3">
-          <TreeView>
-            <TreeViewItem label="Nested 1" />
-            <TreeViewItem label="Nested 2" />
-            <TreeViewItem label="Nested 3">
-              <TreeView>
-                  <TreeViewItem label="Sub Nested 1" />
-                  <TreeViewItem label="Sub Nested 2" />
-              </TreeView>
-            </TreeViewItem>
-            <TreeViewItem label="Nested 4" />
-          </TreeView>
-        </TreeViewItem>
-        <TreeViewItem label="Item 4" />
-      </TreeView>
-      , document.getElementById('treeViewReact'))
   }
 
 }
