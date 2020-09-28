@@ -43,8 +43,9 @@ module.exports = {
     .click('*[data-id="slider"]')
     .setValue('*[data-id="slider"]', '50')
     .pause(2000)
-    .assert.containsText('*[data-id="solidityLocals"]', 'no locals')
-    .assert.containsText('*[data-id="stepdetail"]', 'vm trace step:\n92')
+    .click('*[data-id="dropdownPanelSolidityLocals"]')
+    .assert.containsText('*[data-id="solidityLocals"]', 'No data available')
+    .assert.containsText('*[data-id="stepdetail"]', 'vm trace step:\n91')
   },
 
   'Should step back and forward transaction': function (browser: NightwatchBrowser) {
@@ -52,12 +53,12 @@ module.exports = {
     .waitForElementPresent('*[data-id="buttonNavigatorIntoBack"]')
     .scrollAndClick('*[data-id="buttonNavigatorIntoBack"]')
     .pause(2000)
-    .assert.containsText('*[data-id="stepdetail"]', 'vm trace step:\n91')
-    .assert.containsText('*[data-id="stepdetail"]', 'execution step:\n91')
+    .assert.containsText('*[data-id="stepdetail"]', 'vm trace step:\n90')
+    .assert.containsText('*[data-id="stepdetail"]', 'execution step:\n90')
     .click('*[data-id="buttonNavigatorIntoForward"]')
     .pause(2000)
-    .assert.containsText('*[data-id="stepdetail"]', 'vm trace step:\n92')
-    .assert.containsText('*[data-id="stepdetail"]', 'execution step:\n92')
+    .assert.containsText('*[data-id="stepdetail"]', 'vm trace step:\n91')
+    .assert.containsText('*[data-id="stepdetail"]', 'execution step:\n91')
   },
 
   'Should jump through breakpoints': function (browser: NightwatchBrowser) {
@@ -104,7 +105,7 @@ const sources = [
   {
     'browser/blah.sol': {
       content: `
-    pragma solidity >=0.4.22 <0.6.0;
+    pragma solidity >=0.4.22 <0.7.0;
 
     contract Kickstarter {
 
