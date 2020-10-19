@@ -1,5 +1,6 @@
 /* global localStorage, fetch */
-import { PluginManager, IframePlugin } from '@remixproject/engine'
+import { PluginManager } from '@remixproject/engine'
+import { IframePlugin } from '@remixproject/engine-web'
 import { EventEmitter } from 'events'
 import QueryParams from './lib/query-params'
 import { PermissionHandler } from './app/ui/persmission-handler'
@@ -28,11 +29,11 @@ export class RemixAppManager extends PluginManager {
     this.permissionHandler = new PermissionHandler()
   }
 
-  async canActivate (from, to) {
+  async canActivatePlugin (from, to) {
     return canActivate(from.name)
   }
 
-  async canDeactivate (from, to) {
+  async canDeactivatePlugin (from, to) {
     return from.name === 'manager'
   }
 
@@ -69,8 +70,8 @@ export class RemixAppManager extends PluginManager {
     this.event.emit('deactivate', plugin)
   }
 
-  onRegistration (plugin) {
-    this.event.emit('added', plugin.name)
+  onRegistration () {
+    console.log('manager has been registered')
   }
 
   async ensureActivated (apiName) {
