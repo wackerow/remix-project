@@ -81,7 +81,11 @@ Renderer.prototype.error = function (message, container, opt) {
     text = message.innerText
   }
 
-  var errLocation = text.match(/^([^:]*):([0-9]*):(([0-9]*):)? /)
+  // ^ e.g:
+  // browser/gm.sol: Warning: Source file does not specify required compiler version! Consider adding "pragma solidity ^0.6.12
+  // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.2.0/contracts/introspection/IERC1820Registry.sol:3:1: ParserError: Source file requires different compiler version (current compiler is 0.7.4+commit.3f05b770.Emscripten.clang) - note that nightly builds are considered to be strictly less than the released version
+
+  var errLocation = text.match(/(.*):(\d+):(\d+):?/) // exrract filname, line column
   if ((!opt.errFile || !opt.errCol || !opt.errLine) && errLocation) {
     errLocation = parseRegExError(errLocation)
     opt.errFile = errLocation.errFile
@@ -107,7 +111,7 @@ Renderer.prototype.error = function (message, container, opt) {
   $error.click((ev) => {
     if (opt.click) {
       opt.click(message)
-    } else if (opt.errFile && opt.errLine && opt.errCol) {
+    } else if (opt.errFile !== undefined && opt.errLine !== undefined && opt.errCol !== undefined) {
       this._errorClick(opt.errFile, opt.errLine, opt.errCol)
     }
   })
@@ -123,7 +127,7 @@ function parseRegExError (err) {
   return {
     errFile: err[1],
     errLine: parseInt(err[2], 10) - 1,
-    errCol: err[4] ? parseInt(err[4], 10) : 0
+    errCol: err[3] ? parseInt(err[3], 10) : 0
   }
 }
 
